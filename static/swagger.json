@@ -1,0 +1,586 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Project API",
+    "version": "v1",
+    "description": "API documentation for managing projects"
+  },
+  "paths": {
+    "/projects/": {
+      "get": {
+        "operationId": "ProjectListCreateView-get",
+        "summary": "Retrieve a list of all projects.",
+        "responses": {
+          "200": {
+            "description": "A list of projects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "ProjectListCreateView-post",
+        "summary": "Create a new project.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Project"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Project created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{pk}/": {
+      "get": {
+        "operationId": "ProjectDetailView-get",
+        "summary": "Retrieve a specific project by its ID.",
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A project object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProjectDetailView-put",
+        "summary": "Update an existing project.",
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Project"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Project updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ProjectDetailView-delete",
+        "summary": "Delete a specific project by its ID.",
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Project deleted successfully."
+          }
+        }
+      }
+    },
+    "/employees/": {
+      "get": {
+        "operationId": "EmployeeListCreateView-get",
+        "summary": "Retrieve a list of all employees.",
+        "responses": {
+          "200": {
+            "description": "A list of employees.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "EmployeeListCreateView-post",
+        "summary": "Create a new employee.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Employee created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/employees/{pk}/": {
+      "get": {
+        "operationId": "EmployeeDetailView-get",
+        "summary": "Retrieve a specific employee by its ID.",
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An employee object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "EmployeeDetailView-put",
+        "summary": "Update an existing employee.",
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Employee updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EmployeeDetailView-delete",
+        "summary": "Delete a specific employee by its ID.",
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Employee deleted successfully."
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/allocation-suggestions/": {
+      "get": {
+        "operationId": "AllocationSuggestionViewSet-list",
+        "summary": "Get allocation suggestions for a project.",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of allocation suggestions for the project.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AllocationSuggestion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/best-allocation-suggestions/": {
+      "get": {
+        "operationId": "BestAllocationSuggestionViewSet-list",
+        "summary": "Get the best allocation suggestions for a project.",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of best allocation suggestions for the project.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BestAllocationSuggestion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/export_employee_report/": {
+      "post": {
+        "operationId": "export_report_view-post",
+        "summary": "Triggers the background task to export the employee allocation percentages report.",
+        "responses": {
+          "200": {
+            "description": "Report export triggered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The report is being generated. You will receive an email with the download link."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+      "/current-allocations/": {
+      "get": {
+        "operationId": "current_allocations-get",
+        "summary": "Fetch the current allocations for an employee or a project.",
+        "parameters": [
+          {
+            "name": "employee_id",
+            "in": "query",
+            "description": "ID of the employee",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "project_id",
+            "in": "query",
+            "description": "ID of the project",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of allocations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Allocation"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - either 'employee_id' or 'project_id' must be provided"
+          }
+        }
+      }
+    },
+    "/add-employee-to-project/": {
+      "post": {
+        "operationId": "add_employee_to_project-post",
+        "summary": "Add an employee to a project with specified allocation.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "employee": {
+                    "type": "integer",
+                    "description": "ID of the employee"
+                  },
+                  "project": {
+                    "type": "integer",
+                    "description": "ID of the project"
+                  },
+                  "allocation_percentage": {
+                    "type": "number",
+                    "description": "Allocation percentage for the employee"
+                  },
+                  "allocation_start_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Start date of the allocation"
+                  },
+                  "allocation_end_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "End date of the allocation"
+                  }
+                },
+                "required": ["employee", "project", "allocation_percentage", "allocation_start_date", "allocation_end_date"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Employee successfully added to the project.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Allocation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Employee or Project not found, or validation errors"
+          }
+        }
+      }
+    },
+    "/remove-employee-from-project/{allocation_id}/": {
+      "delete": {
+        "operationId": "remove_employee_from_project-delete",
+        "summary": "Remove an employee from a project by deleting the allocation.",
+        "parameters": [
+          {
+            "name": "allocation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "ID of the allocation to be removed"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Employee successfully removed from the project."
+          },
+          "404": {
+            "description": "Allocation not found."
+          }
+        }
+      }
+    }
+
+    
+
+  },
+  
+  "components": {
+    "schemas": {
+      "Project": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "capacity": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "Employee": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          },
+          "availability": {
+            "type": "string",
+            "enum": ["FT", "PT"]
+          },
+          "department": {
+            "type": "string"
+          }
+        }
+      },
+      "AllocationSuggestion": {
+        "type": "object",
+        "properties": {
+          "employee": {
+            "type": "string"
+          },
+          "available_hours": {
+            "type": "integer"
+          }
+        }
+      },
+      "BestAllocationSuggestion": {
+        "type": "object",
+        "properties": {
+          "employee": {
+            "type": "string"
+          },
+          "available_hours": {
+            "type": "integer"
+          },
+          "allocation_percentage": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "Allocation": {
+        "type": "object",
+        "properties": {
+          "employee": {
+            "type": "string"
+          },
+          "project": {
+            "type": "string"
+          },
+          "allocation_percentage": {
+            "type": "number",
+            "format": "float"
+          },
+          "allocation_start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "allocation_end_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+
+  
+}
+
+

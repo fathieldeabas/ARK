@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_DB: database
+      POSTGRES_PASSWORD: Password
+    volumes:
+      - .:/var/lib/postgresql
+      - postgresql_volume:/var/lib/postgresql/data1
+    networks:
+      - ark_network
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    command: sh -c "
+             python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+      - 3000:3000
+    depends_on:
+      - db
+      - redis
+
+    networks:
+      - ark_network
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - ark_network
+  celery:
+    build: .
+    container_name: celery
+    depends_on:
+      - redis
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0  # Use service name as hostname
+    networks:
+      - ark_network
+    command: celery -A Arkleap worker --loglevel=info
+
+  celery-beat:
+    build: .
+    command: celery -A Arkleap.celery beat --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+    networks:
+      - ark_network
+
+volumes:
+  postgresql_volume:
+
+
+networks:
+  ark_network:
+    driver: bridge
+
