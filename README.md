@@ -38,7 +38,7 @@ To build the Docker image locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/project-api.git
+   git clone https://github.com/fathieldeabas/ARK.git
    cd project-api
    ```
 
