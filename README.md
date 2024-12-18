@@ -118,6 +118,12 @@ Example of environment variables:
  you can create a `.env` file and place it in the same directory as your `Dockerfile`. Docker will automatically read this file.
 
 ---
+## How to use
+
+Check this api for the swagger:-http://localhost:8000/docs/swagger-ui/
+
+### Don't forget register the taskes in django admin
+---
 
 ## Troubleshooting
 
