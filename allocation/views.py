@@ -71,8 +71,6 @@ class BestAllocationSuggestionViewSet(viewsets.ViewSet):
         # Step 1: Prioritize employees based on utilization
         employees_utilization = self.get_employees_utilization()
         employees_sorted_by_utilization = sorted(employees, key=lambda emp: employees_utilization.get(emp.id, 0))
-        print("3333")
-        print(employees_sorted_by_utilization)
         
         # Step 2: Find best matching employees
         allocation_suggestions = []
@@ -104,12 +102,8 @@ class BestAllocationSuggestionViewSet(viewsets.ViewSet):
         """Fetch total hours allocated for each employee."""
         utilization = defaultdict(int)
         allocations = Allocation.objects.all()
-        print("11")
-        print(utilization)
         for allocation in allocations:
             utilization[allocation.employee.id] += allocation.allocation_percentage
-        print("222")
-        print(utilization)
         return utilization
 
 
@@ -175,6 +169,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .tasks import Export_Employee_allocation_percentages
 
+@api_view(['POST'])
 def export_report_view(request):
     if request.method == 'POST':
         # Trigger the background task (Celery)

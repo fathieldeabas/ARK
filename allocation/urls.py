@@ -4,6 +4,7 @@ from .views import AllocationSuggestionViewSet, BestAllocationSuggestionViewSet,
 
 from .views import current_allocations
 
+
 urlpatterns = [
     path('current-allocations/', current_allocations, name='current_allocations'),
 ]
@@ -12,7 +13,7 @@ urlpatterns = [
 router = DefaultRouter()
 router.register(r'projects/(?P<project_id>\d+)/allocation-suggestions', AllocationSuggestionViewSet, basename='allocation-suggestions')
 router.register(r'projects/(?P<project_id>\d+)/best-allocation-suggestions', BestAllocationSuggestionViewSet, basename='best-allocation-suggestions')
-
+app_name="allocation"
 
 # Include the router URLs in your app's URL configuration
 urlpatterns = [
